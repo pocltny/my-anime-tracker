@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 
 export default function EditPage() {
   const router = useRouter();
-  const { id } = useParams(); // ดึง ID จาก URL
+  const { id } = useParams(); 
   const [form, setForm] = useState({
     title: '',
     genre: '',
@@ -14,12 +14,10 @@ export default function EditPage() {
     image_url: ''
   });
 
-  // ดึงข้อมูลเดิมจาก Database มาแสดงในฟอร์ม
   useEffect(() => {
     fetch('/api/animes')
       .then(res => res.json())
       .then(data => {
-        // หาเรื่องที่มี ID ตรงกับ URL
         const target = data.find(item => item.id == id);
         if (target) {
           setForm({
@@ -39,7 +37,7 @@ export default function EditPage() {
       const res = await fetch('/api/animes', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, id: id }) // ส่งข้อมูลพร้อม ID ไปอัปเดต
+        body: JSON.stringify({ ...form, id: id }) 
       });
 
       if (res.ok) {
@@ -51,7 +49,7 @@ export default function EditPage() {
           color: '#ffffff',
           confirmButtonColor: '#4CAF50'
         }).then(() => {
-          router.push('/'); // อัปเดตเสร็จแล้วกลับหน้าแรก
+          router.push('/'); 
         });
       } else {
         throw new Error('Update failed');
@@ -68,57 +66,70 @@ export default function EditPage() {
     }
   }
 
+  // สร้างตัวแปร style ไว้ข้างในหรือข้างนอกฟังก์ชันก็ได้ แต่แนะนำให้วางในฟังก์ชันถ้าใช้แค่ที่นี่
+  const inputStyle = { padding: '12px', borderRadius: '10px', border: '1px solid #ddd', fontSize: '16px', outline: 'none' };
+
   return (
     <div style={{ padding: '40px', backgroundColor: '#1a1a1a', minHeight: '100vh', color: 'white', fontFamily: 'Arial, sans-serif' }}>
       <div style={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#fff', padding: '30px', borderRadius: '20px', color: '#333', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
-        <h2 style={{ marginTop: 0, color: '#2196F3', textAlign: 'center' }}>📝 แก้ไขอนิเมะ</h2>
-        <div style={{ width: '50px', height: '3px', backgroundColor: '#2196F3', margin: '-10px auto 20px auto' }}></div>
         
+        <h2 style={{ marginBottom: '10px', marginTop: 0, color: '#2196F3', textAlign: 'center' }}>
+          📝 แก้ไขอนิเมะ
+        </h2>
+
+        <div style={{
+          width: '50px',
+          height: '4px',
+          backgroundColor: '#2196F3',
+          margin: '0 auto 30px auto',
+          borderRadius: '2px'
+        }}></div>
+
         <form onSubmit={handleUpdate} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          
+
           <label style={{ fontWeight: 'bold' }}>ชื่อเรื่อง:</label>
-          <input 
-            value={form.title} 
-            onChange={e => setForm({...form, title: e.target.value})} 
-            required 
-            style={inputStyle} 
+          <input
+            value={form.title}
+            onChange={e => setForm({ ...form, title: e.target.value })}
+            required
+            style={inputStyle}
           />
-          
+
           <label style={{ fontWeight: 'bold' }}>แนว:</label>
-          <input 
-            value={form.genre} 
-            onChange={e => setForm({...form, genre: e.target.value})} 
-            style={inputStyle} 
+          <input
+            value={form.genre}
+            onChange={e => setForm({ ...form, genre: e.target.value })}
+            style={inputStyle}
           />
-          
+
           <label style={{ fontWeight: 'bold' }}>คะแนน (1-10):</label>
-          <input 
-            type="number" 
-            min="1" 
-            max="10" 
-            value={form.rating} 
-            onChange={e => setForm({...form, rating: e.target.value})} 
-            style={inputStyle} 
+          <input
+            type="number"
+            min="1"
+            max="10"
+            value={form.rating}
+            onChange={e => setForm({ ...form, rating: e.target.value })}
+            style={inputStyle}
           />
-          
+
           <label style={{ fontWeight: 'bold' }}>สถานะ:</label>
-          <select 
-            value={form.status} 
-            onChange={e => setForm({...form, status: e.target.value})} 
+          <select
+            value={form.status}
+            onChange={e => setForm({ ...form, status: e.target.value })}
             style={inputStyle}
           >
             <option value="กำลังดู">กำลังดู</option>
             <option value="ดูจบแล้ว">ดูจบแล้ว</option>
             <option value="ดองไว้ก่อน">ดองไว้ก่อน</option>
           </select>
-          
+
           <label style={{ fontWeight: 'bold' }}>ลิงก์รูปภาพ (URL):</label>
-          <input 
-            value={form.image_url} 
-            onChange={e => setForm({...form, image_url: e.target.value})} 
-            style={inputStyle} 
+          <input
+            value={form.image_url}
+            onChange={e => setForm({ ...form, image_url: e.target.value })}
+            style={inputStyle}
           />
-          
+
           <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
             <button type="submit" style={{ flex: 1, backgroundColor: '#2196F3', color: 'white', border: 'none', padding: '12px', borderRadius: '30px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px' }}>
               อัปเดตข้อมูล
@@ -130,7 +141,5 @@ export default function EditPage() {
         </form>
       </div>
     </div>
-  )
-}
-
-const inputStyle = { padding: '12px', borderRadius: '10px', border: '1px solid #ddd', fontSize: '16px', outline: 'none' };
+  );
+} // ปิดปีกกาของฟังก์ชัน EditPage ตรงนี้ครับ!
