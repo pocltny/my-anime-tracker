@@ -52,10 +52,9 @@ export default function AddPage() {
     <div style={{ padding: '40px', backgroundColor: '#1a1a1a', minHeight: '100vh', color: 'white', fontFamily: 'Arial, sans-serif' }}>
       <div style={{ maxWidth: '500px', margin: '0 auto', backgroundColor: '#fff', padding: '30px', borderRadius: '20px', color: '#333', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
         
-        {/* แก้ไขส่วนหัวข้อตรงนี้ครับ */}
         <h2 style={{ 
           marginTop: 0, 
-          marginBottom: '10px', // เพิ่มระยะห่างด้านล่างแทน
+          marginBottom: '10px',
           color: '#4CAF50', 
           textAlign: 'center',
           textDecoration: 'none'
@@ -63,12 +62,11 @@ export default function AddPage() {
           ➕ เพิ่มอนิเมะเรื่องใหม่
         </h2>
         
-        {/* เส้นใต้หัวข้อ - ปรับ margin ไม่ให้เป็นค่าติดลบ */}
         <div style={{ 
           width: '60px', 
           height: '4px', 
           backgroundColor: '#4CAF50', 
-          margin: '0 auto 25px auto', // เปลี่ยนจาก -10px เป็น 0 เพื่อไม่ให้มันลอยทับตัวหนังสือ
+          margin: '0 auto 25px auto',
           borderRadius: '10px' 
         }}></div>
         
