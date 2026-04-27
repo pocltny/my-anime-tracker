@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Swal from 'sweetalert2' // อย่าลืมลง npm install sweetalert2 ด้วยนะครับ
+import Swal from 'sweetalert2'
 
 export default function Page() {
   const [animes, setAnimes] = useState([]);
@@ -24,7 +24,6 @@ export default function Page() {
 
   useEffect(() => { fetchAnimes(); }, []);
 
-  // ฟังก์ชันลบแบบ SweetAlert2 สุดเท่
   const handleDelete = async (id) => {
     Swal.fire({
       title: 'ยืนยันการลบ?',
@@ -81,19 +80,17 @@ export default function Page() {
   return (
     <div style={{ padding: '60px', backgroundColor: '#1a1a1a', minHeight: '100vh', color: 'white', fontFamily: 'Arial, sans-serif' }}>
       
-      {/* Header */}
+
       <header style={{ textAlign: 'center', marginBottom: '40px' }}>
         <h1 style={{ color: '#4CAF50', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '36px', marginBottom: '10px' }}>My Anime Tracker</h1>
         <div style={{ width: '100px', height: '4px', backgroundColor: '#4CAF50', margin: '0 auto' }}></div>
       </header>
 
-      {/* Nav Buttons */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '30px' }}>
         <Link href="/add"><button style={btnNavStyle}>+ เพิ่มอนิเมะใหม่</button></Link>
         <Link href="/about"><button style={{ ...btnNavStyle, backgroundColor: '#333', color: '#ffc107', border: '1px solid #ffc107' }}>👨‍💻 ข้อมูลผู้จัดทำ</button></Link>
       </div>
 
-      {/* Dashboard */}
       <div style={dashboardStyle}>
         <span style={{ borderRight: '1px solid #444', paddingRight: '15px' }}>📊 ทั้งหมด: <b>{animes.length}</b></span>
         <span>✅ ดูจบแล้ว: <b style={{color: '#4CAF50'}}>{animes.filter(a => a.status === 'ดูจบแล้ว' || a.status === 'Completed').length}</b></span>
@@ -101,7 +98,6 @@ export default function Page() {
         <span>📦 ดองไว้ก่อน: <b style={{color: '#2196F3'}}>{animes.filter(a => a.status === 'ดองไว้ก่อน').length}</b></span>
       </div>
 
-      {/* Search & Filter */}
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <input 
           type="text" 
@@ -129,7 +125,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Anime List Section */}
       {loading ? (
         <p style={{ textAlign: 'center', color: '#aaa' }}>กำลังดึงข้อมูลจาก Database...</p>
       ) : (
@@ -184,7 +179,6 @@ export default function Page() {
   )
 }
 
-// --- Styles ---
 const btnNavStyle = { padding: '12px 24px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '30px', cursor: 'pointer', fontWeight: 'bold' };
 const dashboardStyle = { display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '40px', fontSize: '14px', color: '#aaa', backgroundColor: 'rgba(255,255,255,0.05)', padding: '15px 25px', borderRadius: '15px', maxWidth: '650px', marginLeft: 'auto', marginRight: 'auto', flexWrap: 'wrap' };
 const searchInputStyle = { padding: '12px 25px', width: '100%', maxWidth: '400px', borderRadius: '30px', border: '2px solid #4CAF50', backgroundColor: '#2a2a2a', color: 'white', outline: 'none' };
