@@ -66,7 +66,6 @@ export default function EditPage() {
     }
   }
 
-  // สร้างตัวแปร style ไว้ข้างในหรือข้างนอกฟังก์ชันก็ได้ แต่แนะนำให้วางในฟังก์ชันถ้าใช้แค่ที่นี่
   const inputStyle = { padding: '12px', borderRadius: '10px', border: '1px solid #ddd', fontSize: '16px', outline: 'none' };
 
   return (
@@ -142,4 +141,4 @@ export default function EditPage() {
       </div>
     </div>
   );
-} // ปิดปีกกาของฟังก์ชัน EditPage ตรงนี้ครับ!
+}
